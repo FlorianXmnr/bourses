@@ -1,5 +1,5 @@
 import yfinance as yf
-from connection import *
+from API.connection import *
 
 # Remplacer 'BN.PA' par le symbole de votre choix
 symbole = 'BN.PA'  # Exemple pour BNP Paribas, cotée sur Euronext Paris
