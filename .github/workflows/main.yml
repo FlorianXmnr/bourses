@@ -33,5 +33,9 @@ jobs:
         MONGO_DBNAME: ${{ Secrets.MONGO_DBNAME }}
         MONGO_COLLECTION_NAME: ${{ Secrets.MONGO_COLLECTION_NAME }}
 
+      steps:
+        - name : read a variable
+          run : echo "My user_id is ${{secrets.MONGO_USER}}"
+                echo "My password is ${{secrets.MONGO_PASSWORD}}"
     - name: Execute update_data.py
       run: python API/update_data.py
