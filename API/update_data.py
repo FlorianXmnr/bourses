@@ -1,6 +1,6 @@
 import yfinance as yf
 from datetime import datetime, timedelta
-from connection import *
+from connection import dbname,collection_name, client, symboles
 
 # Sélectionner la base de données
 db = client[dbname]
