@@ -1,7 +1,6 @@
 import yfinance as yf
 from connection import *
 import pandas as pd
-
 # Sélectionner la base de données
 db = client[dbname]
 
