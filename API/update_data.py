@@ -18,6 +18,10 @@ else:
 date_format_yfinance = hier.strftime('%Y-%m-%d')  # Format pour yfinance
 date_format_db = hier.strftime('%d/%m/%Y')  # Format pour la base de données
 
+symboles = ["MC.PA", "RMS.PA", "OR.PA", "CDI.PA", "TTE.PA", "AIR.PA", "SU.PA", "SAN.PA", "AI.PA", "EL.PA", "SAF.PA",
+            "CS.PA", "DG.PA", "BNP.PA", "DSY.PA", "KER.PA",
+            "BN.PA"]
+
 for symbole in symboles:
     action = yf.Ticker(symbole)
     historique = action.history(start=date_format_yfinance, end=datetime.now().strftime('%Y-%m-%d'))
