@@ -22,4 +22,4 @@ jobs:
         # Ajoutez ici d'autres dépendances si nécessaire
         
     - name: Execute update_data.py
-      run: python update_data.py
+      run: python API/update_data.py
