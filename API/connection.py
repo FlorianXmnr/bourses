@@ -8,9 +8,9 @@ dbname = "Stage"
 collection_name = "Bourse"
 
 # URI de connexion
-uri = f"mongodb+srv://{user}:{password}@{host}/?retryWrites=true&w=majority&appName=ClusterBourse&ssl=true"
+uri = f"mongodb+srv://{user}:{password}@{host}/?retryWrites=true&w=majority&appName=ClusterBourse"
 # Se connecter à MongoDB
-client = MongoClient(uri,server_api=ServerApi('1'))
+client = MongoClient(uri, server_api=ServerApi('1'))
 try:
     client.admin.command('ping')
     print("Pinged your deployment. You successfully connected to MongoDB!")
