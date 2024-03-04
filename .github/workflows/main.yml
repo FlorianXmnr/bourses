@@ -27,10 +27,11 @@ jobs:
         pip install yfinance
         # Ajoutez ici d'autres dépendances si nécessaire
       env:
-        MONGO_USER: ${{ Secrets.MONGO_USER }}
-        MONGO_PASSWORD: ${{ Secrets.MONGO_PASSWORD }}
-        MONGO_HOST: ${{ Secrets.MONGO_HOST }}
-        MONGO_DBNAME: ${{ Secrets.MONGO_DBNAME }}
-        MONGO_COLLECTION_NAME: ${{ Secrets.MONGO_COLLECTION_NAME }}
+        MONGO_USER: ${{ secrets.MONGO_USER }}
+        MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+        MONGO_HOST: ${{ secrets.MONGO_HOST }}
+        MONGO_DBNAME: ${{ secrets.MONGO_DBNAME }}
+        MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME }}
+
     - name: Execute update_data.py
       run: python API/update_data.py
