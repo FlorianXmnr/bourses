@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 
+
 user = "alexiszueraspro"
 password = "DJK7hi0GRSkl8upZ"
 host = "clusterbourse.60a6vhb.mongodb.net"
@@ -7,8 +8,7 @@ dbname = "Stage"
 collection_name = "Bourse"
 
 # URI de connexion
-uri = (f"mongodb+srv://{user}:{password}@{host}/?retryWrites=true&w=majority&connectTimeoutMS=30000&socketTimeoutMS"
-       f"=30000&appName=ClusterBourse")
+uri = f"mongodb+srv://{user}:{password}@{host}/?retryWrites=true&w=majority&appName=ClusterBourse&tls=true"
 # Se connecter à MongoDB
 client = MongoClient(uri)
 try:
