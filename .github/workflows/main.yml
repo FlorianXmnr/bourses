@@ -1,0 +1,25 @@
+name: Automate Update Data Script
+
+on:
+  schedule:
+    - cron: '0 9 * * *'  # Exécute tous les jours à 9h00 UTC
+
+jobs:
+  run_script:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+        
+    - name: Install dependencies
+      run: |
+        pip install yfinance
+        # Ajoutez ici d'autres dépendances si nécessaire
+        
+    - name: Execute update_data.py
+      run: python update_data.py
