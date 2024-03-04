@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: '0 9 * * *'  # Exécute tous les jours à 9h00 UTC
 
+  push:
+    branches:
+      - master
 jobs:
   run_script:
     runs-on: ubuntu-latest
