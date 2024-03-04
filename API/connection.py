@@ -1,5 +1,4 @@
 from pymongo import MongoClient
-from pymongo.server_api import ServerApi
 
 user = "alexiszueraspro"
 password = "DJK7hi0GRSkl8upZ"
@@ -10,7 +9,7 @@ collection_name = "Bourse"
 # URI de connexion
 uri = f"mongodb+srv://{user}:{password}@{host}/?retryWrites=true&w=majority&appName=ClusterBourse"
 # Se connecter à MongoDB
-client = MongoClient(uri, server_api=ServerApi('1'))
+client = MongoClient(uri)
 try:
     client.admin.command('ping')
     print("Pinged your deployment. You successfully connected to MongoDB!")
