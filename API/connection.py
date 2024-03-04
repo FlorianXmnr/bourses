@@ -7,7 +7,8 @@ dbname = "Stage"
 collection_name = "Bourse"
 
 # URI de connexion
-uri = f"mongodb+srv://{user}:{password}@{host}/?retryWrites=true&w=majority&appName=ClusterBourse"
+uri = (f"mongodb+srv://{user}:{password}@{host}/?retryWrites=true&w=majority&connectTimeoutMS=30000&socketTimeoutMS"
+       f"=30000&appName=ClusterBourse")
 # Se connecter à MongoDB
 client = MongoClient(uri)
 try:
