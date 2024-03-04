@@ -9,7 +9,7 @@ symboles = ["MC.PA", "RMS.PA", "OR.PA", "CDI.PA", "TTE.PA", "AIR.PA", "SU.PA", "
             "CS.PA", "DG.PA", "BNP.PA", "DSY.PA", "KER.PA",
             "BN.PA"]
 # URI de connexion
-uri = f"mongodb+srv://{user}:{password}@{host}/?retryWrites=true&w=majority&appName=ClusterBourse"
+uri = f"mongodb+srv://{user}:{password}@{host}/?retryWrites=true&w=majority&appName=ClusterBourse&ssl=true"
 # Se connecter à MongoDB
 client = MongoClient(uri)
 try:
