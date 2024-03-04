@@ -24,7 +24,7 @@ try:
     print(dbname)
     print(collection_name)
 
-    uri = f"mongodb://{user}:{password}@{host}/?retryWrites=true&w=majority&appName=ClusterBourse&tls=true"
+    uri = f"mongodb+srv://{user}:{password}@{host}/?retryWrites=true&w=majority&appName=ClusterBourse&tls=true"
     client = MongoClient(uri)
 
     client.admin.command('ping')
