@@ -1,15 +1,15 @@
 from pymongo import MongoClient
 
 
-user = "alexiszueraspro"
-password = "DJK7hi0GRSkl8upZ"
-host = "clusterbourse.60a6vhb.mongodb.net"
-dbname = "Stage"
-collection_name = "Bourse"
+import os
 
-# URI de connexion
+user = os.environ.get("MONGO_USER")
+password = os.environ.get("MONGO_PASSWORD")
+host = os.environ.get("MONGO_HOST")
+dbname = os.environ.get("MONGO_DBNAME")
+collection_name = os.environ.get("MONGO_COLLECTION_NAME")
+
 uri = f"mongodb+srv://{user}:{password}@{host}/?retryWrites=true&w=majority&appName=ClusterBourse&tls=true"
-# Se connecter à MongoDB
 client = MongoClient(uri)
 try:
     client.admin.command('ping')
