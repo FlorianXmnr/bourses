@@ -1,7 +1,6 @@
 from pymongo import MongoClient
 import os
 
-from dotenv import load_dotenv
 """user = "alexiszueraspro"
 password = "DJK7hi0GRSkl8upZ"
 host = "clusterbourse.60a6vhb.mongodb.net"
@@ -13,8 +12,6 @@ uri = f"mongodb+srv://{user}:{password}@{host}/?retryWrites=true&w=majority&appN
 # Se connecter à MongoDB
 """
 try:
-
-    load_dotenv()
     # from connection import *
 
     user = os.getenv("MONGO_USER")
