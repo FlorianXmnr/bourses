@@ -1,40 +1,27 @@
-name: Automate Update Data Script
+name: Automatisation de récupération de données
 
 on:
   workflow_dispatch:  # Permet le déclenchement manuel
   schedule:
     - cron: '0 9 * * *'  # Exécute tous les jours à 9h00 UTC
 
-build:
-  runs-on: ubuntu-latest
-  steps:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
     - uses: actions/checkout@v2
 
-    - name: Set up Python
+    - name: Configurer Python
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
-    - name: Update SSL Certificates
-      run: sudo apt-get update && sudo apt-get install -y ca-certificates
 
-    - name: Update certifi
-      run: pip install --upgrade certifi
-
-    - name: Install dependencies
+    - name: Installer les dépendances
       run: |
         pip install pymongo
         pip install yfinance
-        # Ajoutez ici d'autres dépendances si nécessaire
 
-
-    - name: Testing Secrets
-      run: |
-        echo "$MONGO_USER"
-        echo "$MONGO_PASSWORD"
-        echo "$MONGO_HOST"
-        echo "$MONGO_DBNAME"
-        echo "$MONGO_COLLECTION_NAME"
-        echo "$MONGO_APP_NAME"
+    - name: Exécuter update_data.py
       env:
         MONGO_USER: ${{ secrets.MONGO_USER }}
         MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
@@ -42,6 +29,3 @@ build:
         MONGO_DBNAME: ${{ secrets.MONGO_DBNAME }}
         MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME }}
         MONGO_APP_NAME: ${{ secrets.MONGO_APP_NAME }}
-
-    - name: Execute update_data.py
-      run: python API/update_data.py
