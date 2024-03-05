@@ -2,10 +2,12 @@ import yfinance as yf
 from datetime import datetime, timedelta
 import os
 from pymongo import MongoClient
+from dotenv import load_dotenv
 
+load_dotenv()
 # from connection import *
 
-user = os.environ.get("MONGO_USER")
+user = os.getenv("MONGO_USER")
 password = os.environ.get("MONGO_PASSWORD")
 host = os.environ.get("MONGO_HOST")
 dbname = os.environ.get("MONGO_DBNAME")
