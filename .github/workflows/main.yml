@@ -32,6 +32,7 @@ jobs:
         MONGO_HOST: ${{ secrets.MONGO_HOST }}
         MONGO_DBNAME: ${{ secrets.MONGO_DBNAME }}
         MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME }}
+        MONGO_APP_NAME : ${{ secrets.MONGO_APP_NAME }}
 
     - name : read a variable
       run : echo "My user_id is ${{ secrets.MONGO_USER }}"
