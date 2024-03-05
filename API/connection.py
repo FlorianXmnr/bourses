@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 import os
 
+from dotenv import load_dotenv
 """user = "alexiszueraspro"
 password = "DJK7hi0GRSkl8upZ"
 host = "clusterbourse.60a6vhb.mongodb.net"
@@ -13,13 +14,15 @@ uri = f"mongodb+srv://{user}:{password}@{host}/?retryWrites=true&w=majority&appN
 """
 try:
 
-    user = os.environ.get("MONGO_USER")
-    password = os.environ.get("MONGO_PASSWORD")
-    host = os.environ.get("MONGO_HOST")
-    dbname = os.environ.get("MONGO_DBNAME")
-    collection_name = os.environ.get("MONGO_COLLECTION_NAME")
-    app_name = os.environ.get("MONGO_APP_NAME")
-    uri = f"mongodb+srv://{user}:{password}@{host}/{dbname}?retryWrites=true&w=majority&appName={app_name}&tls=true"
+    load_dotenv()
+    # from connection import *
+
+    user = os.getenv("MONGO_USER")
+    password = os.getenv("MONGO_PASSWORD")
+    host = os.getenv("MONGO_HOST")
+    dbname = os.getenv("MONGO_DBNAME")
+    collection_name = os.getenv("MONGO_COLLECTION_NAME")
+    uri = f"mongodb+srv://{user}:{password}@{host}/?retryWrites=true&w=majority&appName=ClusterBourse"
 
     print(uri)
     client = MongoClient(uri)
