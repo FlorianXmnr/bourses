@@ -15,9 +15,9 @@ collection_name = os.environ.get("MONGO_COLLECTION_NAME")
 uri = f"mongodb+srv://{user}:{password}@{host}/{dbname}?retryWrites=true&w=majority&appName=ClusterBourse&tls=true"
 
 print(uri)
-"""
-client = MongoClient(uri)
 
+client = MongoClient(uri)
+"""
 # Sélectionner la base de données
 db = client[dbname]
 
