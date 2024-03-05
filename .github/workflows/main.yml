@@ -5,10 +5,9 @@ on:
   schedule:
     - cron: '0 9 * * *'  # Exécute tous les jours à 9h00 UTC
 
-jobs:
-  run_script:
-    runs-on: ubuntu-latest
-    steps:
+build:
+  runs-on: ubuntu-latest
+  steps:
     - uses: actions/checkout@v2
 
     - name: Set up Python
@@ -26,10 +25,10 @@ jobs:
         pip install pymongo
         pip install yfinance
         # Ajoutez ici d'autres dépendances si nécessaire
-      
 
-    - name : Testing Secrets
-      run : | 
+
+    - name: Testing Secrets
+      run: |
         echo "$MONGO_USER"
         echo "$MONGO_PASSWORD"
         echo "$MONGO_HOST"
