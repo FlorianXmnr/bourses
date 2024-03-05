@@ -29,3 +29,4 @@ jobs:
         MONGO_DBNAME: ${{ secrets.MONGO_DBNAME }}
         MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME }}
         MONGO_APP_NAME: ${{ secrets.MONGO_APP_NAME }}
+        run: python API/update_data.py
