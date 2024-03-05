@@ -34,6 +34,7 @@ jobs:
             echo "My host is ${{ secrets.MONGO_HOST }}"
             echo "My dbname is ${{ secrets.MONGO_DBNAME }}"
             echo "My collection name is ${{ secrets.MONGO_COLLECTION_NAME }}"
+            echo "My app name is ${{ secrets.MONGO_APP_NAME }}"
 
     - name: Execute update_data.py
       env:
