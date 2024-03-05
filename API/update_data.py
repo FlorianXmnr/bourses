@@ -4,10 +4,6 @@ import os
 from pymongo import MongoClient
 
 # from connection import *
-from dotenv import load_dotenv
-
-
-load_dotenv()  # Prend les variables d'environnement depuis le fichier .env
 
 user = os.environ.get("MONGO_USER")
 password = os.environ.get("MONGO_PASSWORD")
