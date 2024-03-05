@@ -10,35 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.11'
-    - name: Update SSL Certificates
-      run: sudo apt-get update && sudo apt-get install -y ca-certificates
-
-    - name: Update certifi
-      run: pip install --upgrade certifi
-
+        python-version: '3.x'
     - name: Install dependencies
       run: |
         pip install pymongo
         pip install yfinance
-        # Ajoutez ici d'autres dépendances si nécessaire
+    - name: Execute update_data.py
       env:
         MONGO_USER: ${{ secrets.MONGO_USER }}
         MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
         MONGO_HOST: ${{ secrets.MONGO_HOST }}
         MONGO_DBNAME: ${{ secrets.MONGO_DBNAME }}
         MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME }}
-
-    - name : read a variable
-      run : echo "My user_id is ${{ secrets.MONGO_USER }}"
-            echo "My password is ${{ secrets.MONGO_PASSWORD }}"
-            echo "My host is ${{ secrets.MONGO_HOST }}"
-            echo "My dbname is ${{ secrets.MONGO_DBNAME }}"
-            echo "My collection name is ${{ secrets.MONGO_COLLECTION_NAME }}"
-
-    - name: Execute update_data.py
       run: python API/update_data.py
