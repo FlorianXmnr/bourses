@@ -19,7 +19,7 @@ try:
     dbname = os.environ.get("MONGO_DBNAME")
     collection_name = os.environ.get("MONGO_COLLECTION_NAME")
     app_name = os.environ.get("MONGO_APP_NAME")
-    uri = f"mongodb+srv://{user}:{password}@{host}/{dbname}?retryWrites=true&w=majority&appName{app_name}=&tls=true"
+    uri = f"mongodb+srv://{user}:{password}@{host}/{dbname}?retryWrites=true&w=majority&appName={app_name}&tls=true"
 
     print(uri)
     client = MongoClient(uri)
