@@ -10,21 +10,18 @@ collection_name = "Bourse"""
 """# URI de connexion
 uri = f"mongodb+srv://{user}:{password}@{host}/?retryWrites=true&w=majority&appName=ClusterBourse"
 # Se connecter à MongoDB
-client = MongoClient(uri)"""
+"""
 try:
-    user = os.environ.get("Secrets.MONGO_USER")
-    password = os.environ.get("Secrets.MONGO_PASSWORD")
-    host = os.environ.get("Secrets.MONGO_HOST")
-    dbname = os.environ.get("Secrets.MONGO_DBNAME")
-    collection_name = os.environ.get("Secrets.MONGO_COLLECTION_NAME")
 
-    print(user)
-    print(password)
-    print(host)
-    print(dbname)
-    print(collection_name)
+    user = os.environ.get("MONGO_USER")
+    password = os.environ.get("MONGO_PASSWORD")
+    host = os.environ.get("MONGO_HOST")
+    dbname = os.environ.get("MONGO_DBNAME")
+    collection_name = os.environ.get("MONGO_COLLECTION_NAME")
 
-    uri = f"mongodb+srv://{user}:{password}@{host}/?retryWrites=true&w=majority&appName=ClusterBourse&tls=true"
+    uri = f"mongodb+srv://{user}:{password}@{host}/{dbname}?retryWrites=true&w=majority&appName=ClusterBourse&tls=true"
+
+    print(uri)
     client = MongoClient(uri)
 
     client.admin.command('ping')
