@@ -17,8 +17,5 @@ try:
     client.admin.command('ping')
     print("Pinged your deployment. You successfully connected to MongoDB!")
     # Complétez cette liste avec les symboles réels
-    symboles = ["MC.PA", "RMS.PA", "OR.PA", "CDI.PA", "TTE.PA", "AIR.PA", "SU.PA", "SAN.PA", "AI.PA", "EL.PA", "SAF.PA",
-                "CS.PA", "DG.PA", "BNP.PA", "DSY.PA", "KER.PA",
-                "BN.PA"]
 except Exception as e:
     print(e)

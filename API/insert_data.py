@@ -2,6 +2,9 @@ import yfinance as yf
 from connection import *
 import pandas as pd
 # Sélectionner la base de données
+symboles = ["MC.PA", "RMS.PA", "OR.PA", "CDI.PA", "TTE.PA", "AIR.PA", "SU.PA", "SAN.PA", "AI.PA", "EL.PA", "SAF.PA",
+            "CS.PA", "DG.PA", "BNP.PA", "DSY.PA", "KER.PA",
+            "BN.PA"]
 db = client[dbname]
 
 # Sélectionner la collection dans laquelle vous souhaitez insérer les données
