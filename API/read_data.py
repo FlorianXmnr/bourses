@@ -1,6 +1,5 @@
 from connection import *
 import csv
-from datetime import datetime
 
 # MongoDB connection setup
 client = MongoClient(uri)
@@ -11,7 +10,7 @@ collection = db[collection_name]
 symbols = ["MC.PA", "RMS.PA", "OR.PA", "CDI.PA", "TTE.PA", "AIR.PA", "SU.PA", "SAN.PA", "AI.PA", "EL.PA", "SAF.PA", "CS.PA", "DG.PA", "BNP.PA", "DSY.PA", "KER.PA", "BN.PA"]
 
 # CSV file setup
-csv_file_path = 'bourses/historical_data.csv'
+csv_file_path = 'historical_data.csv'
 csv_columns = ['_id', 'Date', 'Open', 'High', 'Low', 'Close', 'Volume', 'Symbole']
 
 # Writing to CSV
