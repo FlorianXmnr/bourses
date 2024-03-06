@@ -18,7 +18,7 @@ csv_file_path = os.path.join(csv_directory, "historical_data.csv")
 csv_columns = ['_id', 'Date', 'Open', 'High', 'Low', 'Close', 'Volume', 'Symbole']
 # Proceed with writing to CSV
 with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
-    writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+    writer = csv.DictWriter(csvfile, fieldnames=csv_columns, delimiter=";")
     writer.writeheader()
     
     for symbol in symbols:
