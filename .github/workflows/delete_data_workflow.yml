@@ -1,0 +1,30 @@
+name: Delete Data from MongoDB
+
+on:
+  workflow_dispatch:
+
+jobs:
+  delete_data_job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install pymongo
+          pip install pandas
+          # Add other dependencies if needed
+
+      - name: Execute delete_data.py
+        run: python API/delete_data.py
+        env:
+          MONGO_USER: ${{ secrets.MONGO_USER }}
+          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+          MONGO_HOST: ${{ secrets.MONGO_HOST }}
+          MONGO_DBNAME: ${{ secrets.MONGO_DBNAME }}
+          MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME }}
