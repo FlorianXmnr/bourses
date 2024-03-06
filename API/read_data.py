@@ -2,24 +2,30 @@ from connection import *
 from datetime import datetime, timedelta
 from pymongo import MongoClient
 
+from pymongo import MongoClient
+import csv
+from datetime import datetime
+
+# MongoDB connection setup
 client = MongoClient(uri)
 db = client[dbname]
 collection = db[collection_name]
-symboles = ["MC.PA", "RMS.PA", "OR.PA", "CDI.PA", "TTE.PA", "AIR.PA", "SU.PA", "SAN.PA", "AI.PA", "EL.PA", "SAF.PA",
-            "CS.PA", "DG.PA", "BNP.PA", "DSY.PA", "KER.PA",
-            "BN.PA"]
-today = datetime.now()
-if today.weekday() == 0:
-    hier = today - timedelta(days=3)
-else:
-    hier = today - timedelta(days=1)
-# Calculer la date d'hier
-hier = hier.strftime('%d/%m/%Y')  # Formattez selon le format de date dans votre base de données
 
-for symbole in symboles:
-    # Trouver le document pour le symbole à la date d'hier
-    document = collection.find_one({"Symbole": symbole, "Date": hier})
-    if document:
-        print(f"Dernière donnée pour {symbole} à la date d'hier : {document}")
-    else:
-        print(f"Aucune donnée trouvée pour {symbole} à la date d'hier.")
+# List of symbols
+symbols = ["MC.PA", "RMS.PA", "OR.PA", "CDI.PA", "TTE.PA", "AIR.PA", "SU.PA", "SAN.PA", "AI.PA", "EL.PA", "SAF.PA", "CS.PA", "DG.PA", "BNP.PA", "DSY.PA", "KER.PA", "BN.PA"]
+
+# CSV file setup
+csv_file_path = 'historical_data.csv'
+csv_columns = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume', 'Symbole']
+
+# Writing to CSV
+with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
+    writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+    writer.writeheader()
+    
+    for symbol in symbols:
+        documents = collection.find({"Symbole": symbol})
+        for document in documents:
+            writer.writerow(document)
+
+print(f"Data successfully written to {csv_file_path}")
