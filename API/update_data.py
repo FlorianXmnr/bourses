@@ -1,7 +1,22 @@
 import yfinance as yf
 from datetime import datetime, timedelta
-from connection import *
+import os
+from pymongo import MongoClient
 
+# from connection import *
+
+user = os.environ.get("MONGO_USER")
+password = os.environ.get("MONGO_PASSWORD")
+host = os.environ.get("MONGO_HOST")
+dbname = os.environ.get("MONGO_DBNAME")
+collection_name = os.environ.get("MONGO_COLLECTION_NAME")
+app_name = os.environ.get("MONGO_APP_NAME")
+uri = f"mongodb+srv://{user}:{password}@{host}/{dbname}?retryWrites=true&w=majority&appName={app_name}&tls=true"
+
+print(uri)
+client = MongoClient(uri)
+
+client = MongoClient(uri)
 
 # Sélectionner la base de données
 db = client[dbname]
