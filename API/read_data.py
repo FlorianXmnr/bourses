@@ -1,6 +1,9 @@
 from connection import *
 from datetime import datetime, timedelta
 # Calculer la date de la veille
+symboles = ["MC.PA", "RMS.PA", "OR.PA", "CDI.PA", "TTE.PA", "AIR.PA", "SU.PA", "SAN.PA", "AI.PA", "EL.PA", "SAF.PA",
+            "CS.PA", "DG.PA", "BNP.PA", "DSY.PA", "KER.PA",
+            "BN.PA"]
 today = datetime.now()
 if today.weekday() == 0:
     hier = today - timedelta(days=3)
