@@ -10,10 +10,13 @@ collection = db[collection_name]
 symbols = ["MC.PA", "RMS.PA", "OR.PA", "CDI.PA", "TTE.PA", "AIR.PA", "SU.PA", "SAN.PA", "AI.PA", "EL.PA", "SAF.PA", "CS.PA", "DG.PA", "BNP.PA", "DSY.PA", "KER.PA", "BN.PA"]
 
 # CSV file setup
-csv_file_path = 'historical_data.csv'
-csv_columns = ['_id', 'Date', 'Open', 'High', 'Low', 'Close', 'Volume', 'Symbole']
 
-# Writing to CSV
+csv_directory = "data"
+os.makedirs(csv_directory, exist_ok=True)
+
+csv_file_path = os.path.join(csv_directory, "historical_data.csv")
+csv_columns = ['_id', 'Date', 'Open', 'High', 'Low', 'Close', 'Volume', 'Symbole']
+# Proceed with writing to CSV
 with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
     writer.writeheader()
