@@ -21,6 +21,8 @@ jobs:
         pip install pymongo
         pip install yfinance
 
+    - name: Obtenir l'adresse IP de l'hôte d'exécution
+      run: curl ifconfig.me
     - name: Exécuter update_data.py
       env:
         MONGO_USER: ${{ secrets.MONGO_USER }}
