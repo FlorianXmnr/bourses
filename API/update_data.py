@@ -1,8 +1,6 @@
 import yfinance as yf
 from datetime import datetime, timedelta
-import os
-from pymongo import MongoClient
-from connection import client,dbname,collection_name
+from connection import client, dbname, collection_name
 
 
 # Sélectionner la base de données
