@@ -1,0 +1,35 @@
+name: Download Historical Data
+
+on:
+  workflow_dispatch: # Permet le déclenchement manuel
+
+jobs:
+  run_read_data:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
+      run: |
+        pip install pymongo
+        pip install pandas
+
+    - name: Execute read_data.py
+      run: python path/to/read_data.py
+      env:
+        MONGO_USER: ${{ secrets.MONGO_USER }}
+        MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+        MONGO_HOST: ${{ secrets.MONGO_HOST }}
+        MONGO_DBNAME: ${{ secrets.MONGO_DBNAME }}
+        MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME }}
+
+    - name: Upload CSV file
+      uses: actions/upload-artifact@v2
+      with:
+        name: historical-data
+        path: Historique/historical_data.csv

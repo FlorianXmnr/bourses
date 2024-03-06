@@ -32,12 +32,3 @@ jobs:
         MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME }}
         MONGO_APP_NAME: ${{ secrets.MONGO_APP_NAME }}
       run: python API/update_data.py
-
-    - name: Execute read_data.py
-      env:
-        MONGO_USER: ${{ secrets.MONGO_USER }}
-        MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
-        MONGO_HOST: ${{ secrets.MONGO_HOST }}
-        MONGO_DBNAME: ${{ secrets.MONGO_DBNAME }}
-        MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME }}
-      run: python API/read_data.py
