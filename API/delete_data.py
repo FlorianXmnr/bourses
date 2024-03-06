@@ -7,11 +7,7 @@ db = client[dbname]
 collection = db[collection_name]
 print(collection)
 
-hier = datetime.now() - timedelta(days=1)
-hier_str = hier.strftime('%d/%m/%Y')  # Formattez selon le format de date dans votre base de données
+# Suppression de tous les documents de la collection
+result = collection.delete_many({})
 
-for symbole in symboles:
-    # Supprimer les documents pour le symbole à la date d'hier
-    result = collection.delete_many({"Symbole": symbole, "Date": hier_str})
-    print(f"Documents supprimés pour {symbole} à la date d'hier: {result.deleted_count}")
-
+print(f"Nombre de documents supprimés: {result.deleted_count}")
