@@ -12,7 +12,7 @@ symbols = ["MC.PA", "RMS.PA", "OR.PA", "CDI.PA", "TTE.PA", "AIR.PA", "SU.PA", "S
 
 # CSV file setup
 csv_file_path = 'historical_data.csv'
-csv_columns = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume', 'Symbole']
+csv_columns = ['_id', 'Date', 'Open', 'High', 'Low', 'Close', 'Volume', 'Symbole']
 
 # Writing to CSV
 with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
