@@ -1,6 +1,10 @@
 from connection import *
 from datetime import datetime, timedelta
-# Calculer la date de la veille
+from pymongo import MongoClient
+
+client = MongoClient(uri)
+db = client[dbname]
+collection = db[collection_name]
 symboles = ["MC.PA", "RMS.PA", "OR.PA", "CDI.PA", "TTE.PA", "AIR.PA", "SU.PA", "SAN.PA", "AI.PA", "EL.PA", "SAF.PA",
             "CS.PA", "DG.PA", "BNP.PA", "DSY.PA", "KER.PA",
             "BN.PA"]
@@ -14,7 +18,7 @@ hier = hier.strftime('%d/%m/%Y')  # Formattez selon le format de date dans votre
 
 for symbole in symboles:
     # Trouver le document pour le symbole à la date d'hier
-    document = collection_name.find_one({"Symbole": symbole, "Date": hier})
+    document = collection.find_one({"Symbole": symbole, "Date": hier})
     if document:
         print(f"Dernière donnée pour {symbole} à la date d'hier : {document}")
     else:
