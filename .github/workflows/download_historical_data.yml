@@ -32,4 +32,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: historical-data
-        path: Historique/historical_data.csv
+        path: ../Historique/historical_data.csv
