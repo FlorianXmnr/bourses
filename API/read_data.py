@@ -1,8 +1,4 @@
 from connection import *
-from datetime import datetime, timedelta
-from pymongo import MongoClient
-
-from pymongo import MongoClient
 import csv
 from datetime import datetime
 
