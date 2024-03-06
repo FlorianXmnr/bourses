@@ -22,6 +22,7 @@ with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
     for symbol in symbols:
         documents = collection.find({"Symbole": symbol})
         for document in documents:
+            document.pop('_id', None)
             writer.writerow(document)
 
 print(f"Data successfully written to {csv_file_path}")
