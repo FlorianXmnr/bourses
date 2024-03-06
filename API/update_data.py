@@ -12,7 +12,7 @@ print(db)
 # Sélectionner la collection dans laquelle vous souhaitez insérer les données
 collection = db[collection_name]
 print(collection)
-"""
+
 # Calculer la date de la veille
 today = datetime.now()
 if today.weekday() == 0:
@@ -45,4 +45,3 @@ for symbole in symboles:
         print(f"Inséré : {document}")
     else:
         print(f"Aucune donnée trouvée pour {symbole} à la date {date_format_db}.")
-"""
