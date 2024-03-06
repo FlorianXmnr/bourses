@@ -18,6 +18,7 @@ jobs:
       run: |
         pip install pymongo
         pip install pandas
+        pip install yfinance
 
     - name: Run insert_data.py
       run: python API/insert_data.py # Adjust path as necessary
