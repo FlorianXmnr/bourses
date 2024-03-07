@@ -24,3 +24,10 @@ documents = list(collection.find({"Symbole": symbol}))
 df = pd.DataFrame(documents)
 # Supposons que df est votre DataFrame
 print(df.dtypes)
+
+selected_columns = df.loc[:, "Open":"Volume"]
+
+# Use the .describe() method to get the summary statistics
+description = selected_columns.describe()
+
+print(description)
