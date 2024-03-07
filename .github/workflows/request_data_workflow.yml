@@ -20,7 +20,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install pymongo
           pip install pandas # If you need pandas for data manipulation
-
+      - name: Upload Plot
+        uses: actions/upload-artifact@v2
+        with:
+          name: Plot
+          path: open_price_plot.png
       - name: Execute query script
         run: python requete_data.py
         env:
