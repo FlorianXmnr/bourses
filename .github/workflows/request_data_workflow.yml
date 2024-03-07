@@ -21,11 +21,6 @@ jobs:
           pip install pymongo
           pip install pandas
           pip install matplotlib # If you need pandas for data manipulation
-      - name: Upload Plot
-        uses: actions/upload-artifact@v2
-        with:
-          name: Plot
-          path: open_price_plot.png
       - name: Execute query script
         run: python requete_data.py
         env:
@@ -34,3 +29,8 @@ jobs:
           MONGO_HOST: ${{ secrets.MONGO_HOST }}
           MONGO_DBNAME: ${{ secrets.MONGO_DBNAME }}
           MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME }}
+      - name: Upload Plot
+        uses: actions/upload-artifact@v2
+        with:
+          name: Plot
+          path: open_price_plot.png
