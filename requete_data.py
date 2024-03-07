@@ -16,6 +16,8 @@ documents = list(collection.find({"Symbole": symbol}))
 # Convert to DataFrame for analysis
 df = pd.DataFrame(documents)
 # Supposons que df est votre DataFrame
+df['Date'] = pd.to_datetime(df['Date'], format='%d/%m/%Y')
+
 print(df.dtypes)
 
 selected_columns = df.loc[:, "Open":"Volume"]
@@ -24,9 +26,6 @@ selected_columns = df.loc[:, "Open":"Volume"]
 description = selected_columns.describe()
 
 print(description)
-
-
-
 
 # Assuming 'data' is a pandas DataFrame or similar
 plt.figure(figsize=(10, 6))
