@@ -34,7 +34,7 @@ plt.xlabel('Date')
 plt.ylabel('Open Price')
 
 # Formatage de l'axe des x pour afficher uniquement le mois et l'année
-plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m-%Y'))
+plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
 plt.gca().xaxis.set_major_locator(mdates.MonthLocator(interval=1))
 plt.gcf().autofmt_xdate() # Rotation automatique des dates pour une meilleure lisibilité
 
