@@ -1,4 +1,4 @@
-import os
+import matplotlib.dates as mdates
 from API.connection import *
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -27,10 +27,15 @@ description = selected_columns.describe()
 
 print(description)
 
-# Assuming 'data' is a pandas DataFrame or similar
 plt.figure(figsize=(10, 6))
-plt.plot(df['Open'])
+plt.plot(df['Date'], df['Open'])
 plt.title('Open Price Over Time')
 plt.xlabel('Date')
 plt.ylabel('Open Price')
+
+# Formatage de l'axe des x pour afficher uniquement le mois et l'année
+plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m-%Y'))
+plt.gca().xaxis.set_major_locator(mdates.MonthLocator(interval=1))
+plt.gcf().autofmt_xdate() # Rotation automatique des dates pour une meilleure lisibilité
+
 plt.savefig('open_price_plot.png')
