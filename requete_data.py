@@ -29,7 +29,9 @@ df.drop(columns=['_id'], inplace=True)
 # Example analysis (replace with your own analysis)
 print(df.describe())
 
-# For median, average (mean), and percentiles
-print("Median:\n", df.median())
-print("Mean:\n", df.mean())
-print("Percentiles:\n", df.quantile([0.25, 0.5, 0.75]))
+cols_num = df.select_dtypes(include=['float64', 'int64']).columns
+
+# Calculer les statistiques seulement sur les colonnes numériques
+print("Médiane:\n", df[cols_num].median())
+print("Moyenne:\n", df[cols_num].mean())
+print("Percentiles:\n", df[cols_num].quantile([0.25, 0.5, 0.75]))
