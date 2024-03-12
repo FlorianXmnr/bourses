@@ -1,35 +1,74 @@
-import yfinance as yf
-from API.connection import *
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from keras.models import Sequential
+from keras.layers import Dense
+import numpy as np
+from keras import regularizers
+import matplotlib.pyplot as plt
 
-# Remplacer 'BN.PA' par le symbole de votre choix
-symbole = 'BN.PA'  # Exemple pour BNP Paribas, cotée sur Euronext Paris
-action = yf.Ticker(symbole)
 
-# Récupérer les données historiques
-historique = action.history(period="max")  # 'max' pour l'historique complet, ou '1mo', '1y', etc.
+# Charger les données
+df = pd.read_csv('Data.csv', sep=";")
+df = df[df['Symbole'] == 'KER.PA']
+# Convertir la colonne de date en datetime et extraire le nombre de jours
+df['Date'] = pd.to_datetime(df['Date'])
+start_date = pd.to_datetime('2023-02-01')
+df = df[df['Date'] >= start_date]
+df['Date'] = (df['Date'] - df['Date'].min()) / np.timedelta64(1, 'D')
 
-historique = historique.drop(columns=['Dividends', 'Stock Splits'])
+# Définir X et y
+X = df['Date'].values.reshape(-1, 1)
+y = df['Close'].values.reshape(-1, 1)
 
-# Réinitialiser l'index pour transformer les dates d'index en une colonne "Date"
-historique = historique.reset_index()
-historique['Date'] = historique['Date'].dt.strftime('%d/%m/%Y')
+# Diviser les données en ensemble d'entraînement et de test
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
-# Afficher les premières lignes pour vérifier
-print(historique.head())
+# Créer un modèle séquentiel
+model = Sequential()
 
-# Sélectionner la base de données
-db = client[dbname]
+# Ajouter des couches cachées avec régularisation L1 et L2
+model.add(Dense(1024, input_dim=1, activation='relu', kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0.01)))
+model.add(Dense(512, activation='relu', kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0.01)))
+model.add(Dense(256, activation='relu', kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0.01)))
+model.add(Dense(128, activation='relu', kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0.01)))
+model.add(Dense(64, activation='relu', kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0.01)))
+model.add(Dense(32, activation='relu', kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0.01)))
+model.add(Dense(32, activation='relu', kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0.01)))
+model.add(Dense(32, activation='relu', kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0.01)))
+model.add(Dense(32, activation='relu', kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0.01)))
 
-# Sélectionner la collection dans laquelle vous souhaitez insérer les données
-collection = db[collection_name]
-print(collection)
+# Ajouter une couche de sortie avec 1 neurone (puisque nous faisons de la régression)
+model.add(Dense(1))
 
-# Convertir le DataFrame 'historique' en liste de dictionnaires
-records = historique.to_dict('records')
+# Compiler le modèle
+model.compile(loss='mean_squared_error', optimizer='adam')
 
-# Insérer les données dans la collection MongoDB
-try:
-    collection.insert_many(records)
-    print("Les données ont été insérées avec succès dans MongoDB.")
-except Exception as e:
-    print("Une erreur s'est produite lors de l'insertion des données :", e)
+# Entraîner le modèle avec plus d'époques
+model.fit(X_train, y_train, epochs=150, batch_size=5, verbose=0)
+
+# Évaluer le modèle
+train_loss = model.evaluate(X_train, y_train, verbose=0)
+test_loss = model.evaluate(X_test, y_test, verbose=0)
+
+print(f'Train Loss: {train_loss}')
+print(f'Test Loss: {test_loss}')
+"""
+# Définir le nombre de jours à prédire
+num_days = 60
+
+# Créer un array contenant les valeurs des jours pour lesquels faire des prédictions
+last_day = X_train.max()
+X_pred = np.linspace(last_day, last_day + num_days, num_days).reshape(-1, 1)
+
+# Faire des prédictions
+y_pred = model.predict(X_pred)
+print(X_pred)
+print(y_pred)
+# Afficher les prédictions
+plt.figure(figsize=(10, 5))
+plt.plot(X_pred, y_pred, 'r-', label='Prédictions')
+plt.xlabel('Jours')
+plt.ylabel('Prix de clôture')
+plt.title('Prédictions des prix de clôture pour les prochains jours')
+plt.legend()
+plt.show()"""
