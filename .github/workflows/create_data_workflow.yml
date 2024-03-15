@@ -30,7 +30,7 @@ jobs:
         MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME }}
 
     - name: Run insert_data.py
-      run: python API_crpyto/insert_data_crypto.py # Adjust path as necessary
+      run: python API_crypto/insert_data_crypto.py # Adjust path as necessary
       env:
         MONGO_USER: ${{ secrets.MONGO_USER }}
         MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
