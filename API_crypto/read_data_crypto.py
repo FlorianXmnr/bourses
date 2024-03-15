@@ -4,7 +4,7 @@ import csv
 # MongoDB connection setup
 client = MongoClient(uri)
 db = client[dbname]
-collection = db[collection_name]
+collection = db[collection_name_crypto]
 
 # CSV file setup
 

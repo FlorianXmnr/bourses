@@ -5,7 +5,7 @@ import pandas as pd
 db = client[dbname]
 
 # Sélectionner la collection dans laquelle vous souhaitez insérer les données
-collection = db[collection_name]
+collection = db[collection_name_crypto]
 print(collection)
 
 

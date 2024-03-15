@@ -8,7 +8,7 @@ db = client[dbname]
 print(db)
 
 # Sélectionner la collection dans laquelle vous souhaitez insérer les données
-collection = db[collection_name]
+collection = db[collection_name_crypto]
 print(collection)
 
 # Calculer la date de la veille
