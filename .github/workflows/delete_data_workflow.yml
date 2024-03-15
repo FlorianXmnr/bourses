@@ -21,10 +21,19 @@ jobs:
           # Add other dependencies if needed
 
       - name: Execute delete_data.py
-        run: python API/delete_data.py
+        run: python API_bourses/delete_data.py
         env:
           MONGO_USER: ${{ secrets.MONGO_USER }}
           MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
           MONGO_HOST: ${{ secrets.MONGO_HOST }}
           MONGO_DBNAME: ${{ secrets.MONGO_DBNAME }}
           MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME }}
+
+      - name: Execute delete_data_crypto.py
+        run: python API_crpyto/delete_data_crypto.py # Adjust path as necessary
+        env:
+          MONGO_USER: ${{ secrets.MONGO_USER }}
+          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+          MONGO_HOST: ${{ secrets.MONGO_HOST }}
+          MONGO_DBNAME: ${{ secrets.MONGO_DBNAME }}
+          MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME_CRYPTO }}

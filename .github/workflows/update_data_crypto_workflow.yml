@@ -1,8 +1,8 @@
-name: Automatisation de récupération de données des entreprises du CAC 40
+name: Automatisation de récupération de données des cryptos
 
 on:
   schedule:
-    - cron: '0 6 * * 1-5'  # Exécute tous les jours ouvrables à 6h00 UTC
+    - cron: '0 6 * * *'  # Exécute tous les jours ouvrables à 6h00 UTC
 
 jobs:
   build:
@@ -22,12 +22,12 @@ jobs:
 
     - name: Obtenir l'adresse IP de l'hôte d'exécution
       run: curl ifconfig.me
-    - name: Exécuter update_data.py
+    - name: Exécuter update_data_crypto.py
       env:
         MONGO_USER: ${{ secrets.MONGO_USER }}
         MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
         MONGO_HOST: ${{ secrets.MONGO_HOST }}
         MONGO_DBNAME: ${{ secrets.MONGO_DBNAME }}
-        MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME }}
+        MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME_CRYPTO }}
         MONGO_APP_NAME: ${{ secrets.MONGO_APP_NAME }}
-      run: python API_bourses/update_data.py
+      run: python API_crypto/update_data_crypto.py

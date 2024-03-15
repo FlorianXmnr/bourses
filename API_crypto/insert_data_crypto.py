@@ -1,5 +1,5 @@
 import yfinance as yf
-from connection import *
+from connection_crypto import *
 import pandas as pd
 # Sélectionner la base de données
 symboles = ["MC.PA", "RMS.PA", "OR.PA", "CDI.PA", "TTE.PA", "AIR.PA", "SU.PA", "SAN.PA", "AI.PA", "EL.PA", "SAF.PA",

@@ -20,7 +20,7 @@ jobs:
         pip install pandas
 
     - name: Execute read_data.py
-      run: python API/read_data.py
+      run: python API_bourses/read_data.py
       env:
         MONGO_USER: ${{ secrets.MONGO_USER }}
         MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
@@ -28,8 +28,23 @@ jobs:
         MONGO_DBNAME: ${{ secrets.MONGO_DBNAME }}
         MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME }}
 
-    - name: Upload CSV file
+    - name: Upload CSV file bourse
       uses: actions/upload-artifact@v2
       with:
         name: historical-data
-        path: data/historical_data.csv
+        path: historical_data.csv
+
+    - name: Execute read_data_crypto.py
+      run: python API_crpyto/read_data_crypto.py # Adjust path as necessary
+      env:
+        MONGO_USER: ${{ secrets.MONGO_USER }}
+        MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+        MONGO_HOST: ${{ secrets.MONGO_HOST }}
+        MONGO_DBNAME: ${{ secrets.MONGO_DBNAME }}
+        MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME_CRYPTO }}
+
+    - name: Upload CSV file crypto
+      uses: actions/upload-artifact@v2
+      with:
+        name: historical-data
+        path: historical_data_crypto.csv

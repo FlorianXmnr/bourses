@@ -1,6 +1,6 @@
 import yfinance as yf
 from datetime import datetime, timedelta
-from connection import client, dbname, collection_name
+from connection import *
 
 
 # Sélectionner la base de données
@@ -20,10 +20,6 @@ else:
 
 date_format_yfinance = hier.strftime('%Y-%m-%d')  # Format pour yfinance
 date_format_db = hier.strftime('%d/%m/%Y')  # Format pour la base de données
-
-symboles = ["MC.PA", "RMS.PA", "OR.PA", "CDI.PA", "TTE.PA", "AIR.PA", "SU.PA", "SAN.PA", "AI.PA", "EL.PA", "SAF.PA",
-            "CS.PA", "DG.PA", "BNP.PA", "DSY.PA", "KER.PA",
-            "BN.PA"]
 
 for symbole in symboles:
     action = yf.Ticker(symbole)
