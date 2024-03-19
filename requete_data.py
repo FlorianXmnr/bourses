@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 
 # Charger les données
-df = pd.read_csv('fichiers/Data.csv', sep=";")
+df = pd.read_csv('data/Data.csv', sep=";")
 df = df[df['Symbole'] == 'CS.PA']
 # Supposons que df est votre DataFrame
 df['Date'] = pd.to_datetime(df['Date'])
