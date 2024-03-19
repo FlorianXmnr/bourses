@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 # Charger les données
 df = pd.read_csv('data/historical_data.csv', sep=";")
-df_crypto = pd
+df_crypto = pd.read_csv('data/historical_data_crypto.csv', sep=";")
 df = df[df['Symbole'] == 'CS.PA']
 # Supposons que df est votre DataFrame
 df['Date'] = pd.to_datetime(df['Date'])
