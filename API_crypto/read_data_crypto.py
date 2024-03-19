@@ -19,10 +19,9 @@ with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
     writer.writeheader()
 
     for symbol in symboles:
-        documents = collection.find({"Symbole": symbol})
+        documents = collection.find({"Symbole": symbol}).sort([("Symbole", 1), ("Date", 1)])
         for document in documents:
             document.pop('_id', None)
-            document.sort_values(['Symbole', 'Date'])
             writer.writerow(document)
 
 
