@@ -11,7 +11,7 @@ collection = db[collection_name_crypto]
 csv_directory = "data"
 os.makedirs(csv_directory, exist_ok=True)
 
-csv_file_path = os.path.join(csv_directory, "historical_data.csv")
+csv_file_path = os.path.join(csv_directory, "historical_data_crypto.csv")
 csv_columns = ['_id', 'Date', 'Open', 'High', 'Low', 'Close', 'Volume', 'Symbole']
 # Proceed with writing to CSV
 with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
