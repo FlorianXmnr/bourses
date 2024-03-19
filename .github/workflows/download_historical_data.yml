@@ -32,7 +32,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: historical-data
-        path: historical_data.csv
+        path: 'data/historical_data.csv'
 
     - name: Execute read_data_crypto.py
       run: python API_crypto/read_data_crypto.py # Adjust path as necessary
@@ -47,4 +47,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: historical-data-crypto
-        path: historical_data_crypto.csv
+        path: 'data/historical_data_crypto.csv'
