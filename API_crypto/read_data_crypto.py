@@ -24,8 +24,8 @@ with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
         documents = collection.find({"Symbole": symbol}).sort([("Symbole", 1), ("Date", 1)])
         for document in documents:
             document.pop('_id', None)  # Remove the '_id' field
-            # Convert the 'Date' field to datetime and format it
-            document['Date'] = datetime.strptime(document['Date'], '%d/%m/%Y')
+            date = datetime.strptime(document['Date'], '%d/%m/%Y')
+            document['Date'] = date.strftime('%d/%m/%Y')
             writer.writerow(document)
 
 # Sort the CSV file by 'Symbole' and 'Date'
