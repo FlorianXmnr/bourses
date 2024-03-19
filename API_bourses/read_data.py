@@ -33,6 +33,8 @@ with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
 # Sort the CSV file by 'Symbole' and 'Date'
 df = pd.read_csv(csv_file_path, delimiter=";")
 df.sort_values(['Symbole', 'Date'], inplace=True)
+
+print(df)
 df.to_csv(csv_file_path, index=False, sep=";")
 
 print(f"Data successfully written to {csv_file_path}")
