@@ -15,3 +15,5 @@ plt.title('Open Price Over Time')
 plt.xlabel('Date')
 plt.ylabel('Open Price')
 plt.show()
+
+
