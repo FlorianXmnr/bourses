@@ -27,14 +27,22 @@ with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
         for document in documents:
             document.pop('_id', None)  # Remove the '_id' field
             date = datetime.strptime(document['Date'], '%d/%m/%Y')
-            document['Date'] = date.strftime('%d/%m/%Y')
+            document['Date'] = date.strftime('%Y-%m-%d')
             writer.writerow(document)
 
-# Sort the CSV file by 'Symbole' and 'Date'
+# Read the CSV file
 df = pd.read_csv(csv_file_path, delimiter=";")
+
+# Convert the 'Date' column to datetime
+df['Date'] = pd.to_datetime(df['Date'], format='%Y-%m-%d')
+
+# Sort the DataFrame by 'Symbole' and 'Date'
 df.sort_values(['Symbole', 'Date'], inplace=True)
+
+# Reset the index
 df.reset_index(drop=True, inplace=True)
-print(df)
+
+# Write the sorted DataFrame back to the CSV file
 df.to_csv(csv_file_path, index=False, sep=";")
 
 print(f"Data successfully written to {csv_file_path}")
