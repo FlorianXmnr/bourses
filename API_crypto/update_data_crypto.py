@@ -2,7 +2,6 @@ import yfinance as yf
 from datetime import datetime, timedelta
 from connection_crypto import *
 
-
 # Sélectionner la base de données
 db = client[dbname]
 print(db)
