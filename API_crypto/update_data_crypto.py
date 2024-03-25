@@ -12,10 +12,7 @@ print(collection)
 
 # Calculer la date de la veille
 today = datetime.now()
-if today.weekday() == 0:
-    hier = today - timedelta(days=3)
-else:
-    hier = today - timedelta(days=1)
+hier = today - timedelta(days=1)
 
 date_format_yfinance = hier.strftime('%Y-%m-%d')  # Format pour yfinance
 date_format_db = hier.strftime('%d/%m/%Y')  # Format pour la base de données
