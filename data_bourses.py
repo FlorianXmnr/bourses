@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 import numpy as np
+import plotly.graph_objects as go
 
 st.title("Mon Application Streamlit")
 
@@ -10,7 +11,7 @@ df = pd.read_csv('data/historical_data.csv', sep=";")
 df_crypto = pd.read_csv('data/historical_data_crypto.csv', sep=";")
 
 # Liste des options pour les "onglets"
-tabs = ["Bourses", "Cryptomonnaies", "Prédictions"]
+tabs = ["Bourses", "Cryptomonnaies", "Prédictions","Présentation Boursières"]
 
 # Créer les "onglets" avec des boutons radio
 tab = st.radio("Choisissez un onglet:", tabs)
@@ -155,3 +156,29 @@ elif tab == "Prédictions":
     result_df = result_df.rename(columns={'Date': 'Date ATH'})
     # Afficher les prédictions
     st.dataframe(result_df)
+elif tab == "Présentation Boursière (type chandeliers japonais)":
+    # Récupérer les symboles uniques
+    symboles = df['Symbole'].unique()
+
+    # Créer une liste déroulante pour la sélection du symbole
+    selection = st.selectbox('Choisissez une option:', symboles)
+
+    # Filtrer le DataFrame en fonction de la sélection de l'utilisateur
+    filtered_df = df[df['Symbole'] == selection]
+
+    # Assurez-vous que votre DataFrame contient les colonnes 'Open', 'High', 'Low', 'Close' et 'Date'
+    if {'Open', 'High', 'Low', 'Close', 'Date'}.issubset(filtered_df.columns):
+        # Convertir la colonne 'Date' en datetime
+        filtered_df['Date'] = pd.to_datetime(filtered_df['Date'])
+
+        # Créer un graphique en chandelier
+        fig = go.Figure(data=[go.Candlestick(x=filtered_df['Date'],
+                                             open=filtered_df['Open'],
+                                             high=filtered_df['High'],
+                                             low=filtered_df['Low'],
+                                             close=filtered_df['Close'])])
+
+        # Afficher le graphique sur Streamlit
+        st.plotly_chart(fig)
+    else:
+        st.write("Votre DataFrame ne contient pas les colonnes nécessaires.")
