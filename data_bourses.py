@@ -11,7 +11,7 @@ df = pd.read_csv('data/historical_data.csv', sep=";")
 df_crypto = pd.read_csv('data/historical_data_crypto.csv', sep=";")
 
 # Liste des options pour les "onglets"
-tabs = ["Bourses", "Cryptomonnaies", "Prédictions","Présentation Boursière"]
+tabs = ["Bourses", "Cryptomonnaies", "Prédictions","Présentation Boursière (type chandeliers japonais)"]
 
 # Créer les "onglets" avec des boutons radio
 tab = st.radio("Choisissez un onglet:", tabs)
