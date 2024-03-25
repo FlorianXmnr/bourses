@@ -3,7 +3,6 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 import numpy as np
 
-
 st.title("Mon Application Streamlit")
 
 # Lire le fichier CSV dans un DataFrame
