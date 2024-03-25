@@ -1,11 +1,11 @@
 import streamlit as st
 import pandas as pd
-from sklearn.model_selection import train_test_split
+
 from sklearn.linear_model import LinearRegression
-from sklearn import metrics
+
 import numpy as np
 from pandas.tseries.offsets import BDay
-from scipy import stats
+
 from datetime import datetime, timedelta
 
 st.title("Mon Application Streamlit")
