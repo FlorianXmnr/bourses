@@ -1,8 +1,7 @@
 import pandas as pd
 from datetime import datetime
-from sklearn.linear_model import LinearRegression
-from pandas.tseries.offsets import BDay
 import numpy as np
+from sklearn.linear_model import LinearRegression
 
 
 # Lire le fichier CSV dans un DataFrame
@@ -14,7 +13,8 @@ df['Date'] = pd.to_datetime(df['Date'])
 df_crypto['Date'] = pd.to_datetime(df_crypto['Date'])
 
 # Créer un DataFrame vide pour les ATH
-df_ath = pd.DataFrame(columns=['Symbole', 'Dernière Close', 'Date ATH', 'ATH', 'Période ATH', 'Tendance', 'Prédiction J+30'])
+df_ath = pd.DataFrame(columns=['Symbole', 'Dernière Close', 'Date ATH', 'ATH', 'Période ATH'])
+
 
 # Pour chaque DataFrame
 for df_name, df in [('Stocks', df), ('Cryptos', df_crypto)]:
@@ -41,28 +41,17 @@ for df_name, df in [('Stocks', df), ('Cryptos', df_crypto)]:
             ath_period = 'Plus d\'un an'
 
         # Déterminer la tendance
-        if last_close > ath:
-            trend = 'Baissière'
-        else:
+        n_days = 30  # nombre de jours à utiliser pour calculer la tendance
+        X_trend = np.array(range(n_days)).reshape(-1, 1)  # jours
+        y_trend = df_symbol['Close'].values[-n_days:]  # prix de clôture des n derniers jours
+        trend_model = LinearRegression()
+        trend_model.fit(X_trend, y_trend)
+        slope = trend_model.coef_
+
+        if slope > 0:
             trend = 'Haussière'
-
-        # Entraîner le modèle de régression linéaire
-        X = df_symbol.index.values.reshape(-1,1)
-        y = df_symbol['Close'].values.reshape(-1,1)
-        model = LinearRegression()
-        model.fit(X, y)
-
-        # Prédire la valeur de 'Close' 30 jours ouvrables dans le futur
-        last_date = df_symbol['Date'].iloc[-1]
-
-        # Ajouter 30 jours ouvrables à la dernière date
-        future_date = last_date + BDay(30)
-
-        # Convertir la future_date en nombre de jours depuis la date de début
-        future_day = (future_date - start_date) / np.timedelta64(1, 'D')
-
-        # Prédire la valeur de 'Close' pour future_day
-        prediction = model.predict([[future_day]])
+        else:
+            trend = 'Baissière'
 
         # Ajouter l'ATH, la date de l'ATH, la période de l'ATH et la prédiction à df_ath
         new_row = pd.DataFrame({
@@ -70,9 +59,7 @@ for df_name, df in [('Stocks', df), ('Cryptos', df_crypto)]:
             'Dernière Close': [last_close],
             'Date ATH': [ath_date],
             'ATH': [ath],
-            'Période ATH': [ath_period],
-            'Tendance': [trend],
-            'Prédiction J+30': [prediction[0][0]]
+            'Période ATH': [ath_period]
         })
 
         df_ath = pd.concat([df_ath, new_row], ignore_index=True)
