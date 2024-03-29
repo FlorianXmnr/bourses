@@ -13,9 +13,18 @@ try:
 
     print(uri)
     client = MongoClient(uri)
-    symboles = ["MC.PA", "RMS.PA", "OR.PA", "CDI.PA", "TTE.PA", "AIR.PA", "SU.PA", "SAN.PA", "AI.PA", "EL.PA", "SAF.PA",
-                "CS.PA", "DG.PA", "BNP.PA", "DSY.PA", "KER.PA",
-                "BN.PA"]
+    symboles = {
+        "LVMH Moët Hennessy - Louis Vuitton, Société Européenne": "MC.PA",
+        "Hermès International Société en commandite par actions": "RMS.PA",
+        "L'Oréal S.A.": "OR.PA",
+        "Christian Dior SE": "CDI.PA",
+        "TotalEnergies SE": "TTE.PA",
+        "Airbus SE": "AIR.PA",
+        "Schneider Electric S.E.": "SU.PA",
+        "Sanofi": "SAN.PA",
+        "L'Air Liquide S.A.": "AI.PA",
+        "EssilorLuxottica Société anonyme": "EL.PA"
+    }
     client.admin.command('ping')
     print("Pinged your deployment. You successfully connected to MongoDB!")
     # Complétez cette liste avec les symboles réels

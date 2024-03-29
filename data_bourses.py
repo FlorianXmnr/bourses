@@ -16,18 +16,36 @@ tabs = ["Bourses", "Cryptomonnaies", "Prédictions","Présentation Boursière (t
 # Créer les "onglets" avec des boutons radio
 tab = st.radio("Choisissez un onglet:", tabs)
 
+# Dictionnaire qui mappe les symboles aux noms des entreprises
+symbole_to_nom = {
+    "MC.PA": "LVMH Moët Hennessy - Louis Vuitton, Société Européenne",
+    "RMS.PA": "Hermès International Société en commandite par actions",
+    "OR.PA": "L'Oréal S.A.",
+    "CDI.PA": "Christian Dior SE",
+    "TTE.PA": "TotalEnergies SE",
+    "AIR.PA": "Airbus SE",
+    "SU.PA": "Schneider Electric S.E.",
+    "SAN.PA": "Sanofi",
+    "AI.PA": "L'Air Liquide S.A.",
+    "EL.PA": "EssilorLuxottica Société anonyme"
+    # Ajoutez d'autres symboles et noms d'entreprises ici
+}
+
 # Afficher le contenu en fonction de l'onglet sélectionné
 if tab == "Bourses":
     # Récupérer les données de la colonne 'Symbole'
     symboles = df['Symbole'].unique()
     options = ['Open', 'Low', 'High', 'Close']
 
-    # Créer la liste déroulante
-    selection = st.selectbox('Choisissez une option:', symboles)
+    # Créer la liste déroulante avec les noms des entreprises
+    selection = st.selectbox('Choisissez une entreprise:', [symbole_to_nom[symbole] for symbole in symboles if symbole in symbole_to_nom])
     bourses = st.selectbox("Choisissez une période: ", options)
 
-    # Filtrer le DataFrame en fonction de la sélection de l'utilisateur
-    filtered_df = df[df['Symbole'] == selection]
+    # Récupérer le symbole correspondant au nom de l'entreprise sélectionné
+    symbole_selectionne = [symbole for symbole, nom in symbole_to_nom.items() if nom == selection][0]
+
+    # Filtrer le DataFrame en fonction du symbole sélectionné
+    filtered_df = df[df['Symbole'] == symbole_selectionne]
 
     # Définir 'Date' comme index
     filtered_df.set_index('Date', inplace=True)

@@ -22,7 +22,7 @@ with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames=csv_columns, delimiter=";")
     writer.writeheader()
 
-    for symbol in symboles:
+    for symbol in symboles.values():
         documents = collection.find({"Symbole": symbol}).sort([("Symbole", 1), ("Date", 1)])
         for document in documents:
             document.pop('_id', None)  # Remove the '_id' field

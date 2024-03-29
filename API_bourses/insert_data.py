@@ -10,7 +10,7 @@ collection = db[collection_name]
 print(collection)
 
 
-for symbole in symboles:
+for symbole in symboles.values():
     action = yf.Ticker(symbole)
     try:
         historique = action.history(period="max")
