@@ -9,7 +9,7 @@ collection = db[collection_name_crypto]
 print(collection)
 
 
-for symbole in symboles:
+for symbole in symboles.values():
     action = yf.Ticker(symbole)
     try:
         historique = action.history(period="max")

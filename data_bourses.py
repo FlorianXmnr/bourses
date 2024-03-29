@@ -30,7 +30,20 @@ symbole_to_nom = {
     "EL.PA": "EssilorLuxottica Société anonyme"
     # Ajoutez d'autres symboles et noms d'entreprises ici
 }
-
+symbole_to_crypto ={
+        "Bitcoin": "BTC-USD",
+        "Ethereum": "ETH-USD",
+        "Tether": "USDT-USD",
+        "Binance Coin": "BNB-USD",
+        "Solana": "SOL-USD",
+        "Lido Staked ETH": "STETH-USD",
+        "Ripple": "XRP-USD",
+        "USD Coin": "USDC-USD",
+        "Cardano": "ADA-USD",
+        "Dogecoin": "DOGE-USD",
+        "Avalanche": "AVAX-USD",
+        "Shiba Inu": "SHIB-USD"
+}
 # Afficher le contenu en fonction de l'onglet sélectionné
 if tab == "Bourses":
     # Récupérer les données de la colonne 'Symbole'
@@ -58,7 +71,7 @@ elif tab == "Cryptomonnaies":
     options = ['Open', 'Low', 'High', 'Close']
 
     # Créer la liste déroulante
-    selection = st.selectbox('Choisissez une option:', symboles)
+    selection = st.selectbox('Choisissez une option:', [symbole_to_crypto[symbole] for symbole in symboles if symbole in symbole_to_crypto])
     bourses = st.selectbox("Choisissez une période: ", options)
 
     # Filtrer le DataFrame en fonction de la sélection de l'utilisateur

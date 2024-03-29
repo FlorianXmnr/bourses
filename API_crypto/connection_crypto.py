@@ -13,9 +13,20 @@ try:
 
     print(uri)
     client = MongoClient(uri)
-    symboles = ["BTC-USD", "ETH-USD", "USDT-USD", "BNB-USD", "SOL-USD", "STETH-USD", "XRP-USD", "USDC-USD", "ADA-USD",
-                "DOGE-USD",
-                "AVAX-USD", "SHIB-USD"]
+    symboles = {
+        "Bitcoin": "BTC-USD",
+        "Ethereum": "ETH-USD",
+        "Tether": "USDT-USD",
+        "Binance Coin": "BNB-USD",
+        "Solana": "SOL-USD",
+        "Lido Staked ETH": "STETH-USD",
+        "Ripple": "XRP-USD",
+        "USD Coin": "USDC-USD",
+        "Cardano": "ADA-USD",
+        "Dogecoin": "DOGE-USD",
+        "Avalanche": "AVAX-USD",
+        "Shiba Inu": "SHIB-USD"
+    }
     client.admin.command('ping')
     print("Pinged your deployment. You successfully connected to MongoDB!")
     # Complétez cette liste avec les symboles réels
