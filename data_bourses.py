@@ -31,18 +31,18 @@ symbole_to_nom = {
     # Ajoutez d'autres symboles et noms d'entreprises ici
 }
 symbole_to_crypto ={
-        "Bitcoin": "BTC-USD",
-        "Ethereum": "ETH-USD",
-        "Tether": "USDT-USD",
-        "Binance Coin": "BNB-USD",
-        "Solana": "SOL-USD",
-        "Lido Staked ETH": "STETH-USD",
-        "Ripple": "XRP-USD",
-        "USD Coin": "USDC-USD",
-        "Cardano": "ADA-USD",
-        "Dogecoin": "DOGE-USD",
-        "Avalanche": "AVAX-USD",
-        "Shiba Inu": "SHIB-USD"
+    "Bitcoin": "BTC-USD",
+    "Ethereum": "ETH-USD",
+    "Tether": "USDT-USD",
+    "Binance Coin": "BNB-USD",
+    "Solana": "SOL-USD",
+    "Lido Staked ETH": "STETH-USD",
+    "Ripple": "XRP-USD",
+    "USD Coin": "USDC-USD",
+    "Cardano": "ADA-USD",
+    "Dogecoin": "DOGE-USD",
+    "Avalanche": "AVAX-USD",
+    "Shiba Inu": "SHIB-USD"
 }
 # Afficher le contenu en fonction de l'onglet sélectionné
 if tab == "Bourses":
