@@ -23,7 +23,14 @@ try:
         "Schneider Electric S.E.": "SU.PA",
         "Sanofi": "SAN.PA",
         "L'Air Liquide S.A.": "AI.PA",
-        "EssilorLuxottica Société anonyme": "EL.PA"
+        "EssilorLuxottica Société anonyme": "EL.PA",
+        "Safran SA": "SAF.PA",
+        "AXA SA": "CS.PA",
+        "Vinci SA": "DG.PA",
+        "BNP Paribas SA": "BNP.PA",
+        "Dassault Systèmes SE": "DSY.PA",
+        "Kering SA": "KER.PA",
+        "Danone S.A.": "BN.PA"
     }
     client.admin.command('ping')
     print("Pinged your deployment. You successfully connected to MongoDB!")
