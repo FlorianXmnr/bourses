@@ -74,8 +74,10 @@ elif tab == "Cryptomonnaies":
     selection = st.selectbox('Choisissez une option:', [symbole_to_crypto[symbole] for symbole in symboles if symbole in symbole_to_crypto])
     bourses = st.selectbox("Choisissez une période: ", options)
 
-    # Filtrer le DataFrame en fonction de la sélection de l'utilisateur
-    filtered_df = df_crypto[df_crypto['Symbole'] == selection]
+    symbole_selectionne = [symbole for symbole, nom in symbole_to_crypto.items() if nom == selection][0]
+
+    # Filtrer le DataFrame en fonction du symbole sélectionné
+    filtered_df = df[df['Symbole'] == symbole_selectionne]
 
     # Définir 'Date' comme index
     filtered_df.set_index('Date', inplace=True)
