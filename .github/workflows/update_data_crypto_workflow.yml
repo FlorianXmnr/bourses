@@ -2,7 +2,7 @@ name: Automatisation de récupération de données des cryptos
 
 on:
   schedule:
-    - cron: '0 6 * * *'  # Exécute tous les jours ouvrables à 6h00 UTC
+    - cron: '0 10 * * *'  # Exécute tous les jours ouvrables à 10h00 UTC
 
 jobs:
   build:
