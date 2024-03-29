@@ -30,7 +30,7 @@ symbole_to_nom = {
     "EL.PA": "EssilorLuxottica Société anonyme"
     # Ajoutez d'autres symboles et noms d'entreprises ici
 }
-symbole_to_crypto ={
+symbole_to_crypto = {
     "Bitcoin": "BTC-USD",
     "Ethereum": "ETH-USD",
     "Tether": "USDT-USD",
@@ -67,13 +67,15 @@ if tab == "Bourses":
     st.line_chart(filtered_df[bourses])
 elif tab == "Cryptomonnaies":
     # Récupérer les données de la colonne 'Symbole'
-    symboles = df_crypto['Symbole'].unique()
+    symboles = df['Symbole'].unique()
     options = ['Open', 'Low', 'High', 'Close']
 
-    # Créer la liste déroulante
-    selection = st.selectbox('Choisissez une option:', [symbole_to_crypto[symbole] for symbole in symboles if symbole in symbole_to_crypto])
+    # Créer la liste déroulante avec les noms des entreprises
+    selection = st.selectbox('Choisissez une entreprise:',
+                             [symbole_to_crypto[symbole] for symbole in symboles if symbole in symbole_to_crypto])
     bourses = st.selectbox("Choisissez une période: ", options)
 
+    # Récupérer le symbole correspondant au nom de l'entreprise sélectionné
     symbole_selectionne = [symbole for symbole, nom in symbole_to_crypto.items() if nom == selection][0]
 
     # Filtrer le DataFrame en fonction du symbole sélectionné
