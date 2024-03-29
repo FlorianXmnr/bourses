@@ -18,19 +18,26 @@ tab = st.radio("Choisissez un onglet:", tabs)
 
 # Dictionnaire qui mappe les symboles aux noms des entreprises
 symbole_to_nom = {
-    "MC.PA": "LVMH Moët Hennessy - Louis Vuitton, Société Européenne",
-    "RMS.PA": "Hermès International Société en commandite par actions",
-    "OR.PA": "L'Oréal S.A.",
-    "CDI.PA": "Christian Dior SE",
-    "TTE.PA": "TotalEnergies SE",
-    "AIR.PA": "Airbus SE",
-    "SU.PA": "Schneider Electric S.E.",
-    "SAN.PA": "Sanofi",
-    "AI.PA": "L'Air Liquide S.A.",
-    "EL.PA": "EssilorLuxottica Société anonyme"
-    # Ajoutez d'autres symboles et noms d'entreprises ici
+        "LVMH Moët Hennessy - Louis Vuitton": "MC.PA",
+        "Hermès International Société": "RMS.PA",
+        "L'Oréal S.A.": "OR.PA",
+        "Christian Dior SE": "CDI.PA",
+        "TotalEnergies SE": "TTE.PA",
+        "Airbus SE": "AIR.PA",
+        "Schneider Electric S.E.": "SU.PA",
+        "Sanofi": "SAN.PA",
+        "L'Air Liquide S.A.": "AI.PA",
+        "EssilorLuxottica Société anonyme": "EL.PA",
+        "Safran SA": "SAF.PA",
+        "AXA SA": "CS.PA",
+        "Vinci SA": "DG.PA",
+        "BNP Paribas SA": "BNP.PA",
+        "Dassault Systèmes SE": "DSY.PA",
+        "Kering SA": "KER.PA",
+        "Danone S.A.": "BN.PA"
 }
-symbole_to_crypto = {
+
+crypto_to_symbole = {
     "Bitcoin": "BTC-USD",
     "Ethereum": "ETH-USD",
     "Tether": "USDT-USD",
@@ -44,48 +51,48 @@ symbole_to_crypto = {
     "Avalanche": "AVAX-USD",
     "Shiba Inu": "SHIB-USD"
 }
+
+
 # Afficher le contenu en fonction de l'onglet sélectionné
 if tab == "Bourses":
-    # Récupérer les données de la colonne 'Symbole'
+    # Créer la liste déroulante avec les noms des entreprises
     symboles = df['Symbole'].unique()
     options = ['Open', 'Low', 'High', 'Close']
+    # Utilisez directement les clés du dictionnaire pour la sélection
+    selection_nom = st.selectbox('Choisissez une entreprise:', list(symbole_to_nom.keys()))
+    bourses_option = st.selectbox("Choisissez une période: ", options)
 
-    # Créer la liste déroulante avec les noms des entreprises
-    selection = st.selectbox('Choisissez une entreprise:', [symbole_to_nom[symbole] for symbole in symboles if symbole in symbole_to_nom])
-    bourses = st.selectbox("Choisissez une période: ", options)
-
-    # Récupérer le symbole correspondant au nom de l'entreprise sélectionné
-    symbole_selectionne = [symbole for symbole, nom in symbole_to_nom.items() if nom == selection][0]
+    # Récupérer le symbole correspondant au nom de l'entreprise sélectionnée
+    symbole_selectionne = symbole_to_nom[selection_nom]
 
     # Filtrer le DataFrame en fonction du symbole sélectionné
     filtered_df = df[df['Symbole'] == symbole_selectionne]
 
-    # Définir 'Date' comme index
+    # Assurez-vous que 'Date' est au format datetime et définissez-le comme index
+    filtered_df['Date'] = pd.to_datetime(filtered_df['Date'])
     filtered_df.set_index('Date', inplace=True)
 
-    # Créer le graphique
-    st.line_chart(filtered_df[bourses])
+    # Vérifier si l'utilisateur a sélectionné une période et afficher le graphique correspondant
+    if bourses_option:
+        st.line_chart(filtered_df[bourses_option])
 elif tab == "Cryptomonnaies":
-    # Récupérer les données de la colonne 'Symbole'
-    symboles = df['Symbole'].unique()
-    options = ['Open', 'Low', 'High', 'Close']
+    # Liste déroulante pour choisir une cryptomonnaie
+    selection_cryptomonnaie = st.selectbox('Choisissez une cryptomonnaie:', list(crypto_to_symbole.keys()))
 
-    # Créer la liste déroulante avec les noms des entreprises
-    selection = st.selectbox('Choisissez une entreprise:',
-                             [symbole_to_crypto[symbole] for symbole in symboles if symbole in symbole_to_crypto])
-    bourses = st.selectbox("Choisissez une période: ", options)
+    # Liste déroulante pour choisir une période
+    periode_options = ['Open', 'Low', 'High', 'Close']
+    periode_selectionnee = st.selectbox("Choisissez une période: ", periode_options)
 
-    # Récupérer le symbole correspondant au nom de l'entreprise sélectionné
-    symbole_selectionne = [symbole for symbole, nom in symbole_to_crypto.items() if nom == selection][0]
+    # Filtrer le DataFrame en fonction de la cryptomonnaie sélectionnée
+    symbole_selectionne = crypto_to_symbole[selection_cryptomonnaie]
+    filtered_df_crypto = df_crypto[df_crypto['Symbole'] == symbole_selectionne]
 
-    # Filtrer le DataFrame en fonction du symbole sélectionné
-    filtered_df = df[df['Symbole'] == symbole_selectionne]
+    # Assurez-vous que 'Date' est au format datetime et définissez-la comme index
+    filtered_df_crypto['Date'] = pd.to_datetime(filtered_df_crypto['Date'])
+    filtered_df_crypto.set_index('Date', inplace=True)
 
-    # Définir 'Date' comme index
-    filtered_df.set_index('Date', inplace=True)
-
-    # Créer le graphique
-    st.line_chart(filtered_df[bourses])
+    # Afficher le graphique pour la période sélectionnée
+    st.line_chart(filtered_df_crypto[periode_selectionnee])
 elif tab == "Prédictions":
     # Charger le fichier CSV dans un DataFrame
     df["Date"] = pd.to_datetime(df["Date"])

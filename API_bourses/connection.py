@@ -15,7 +15,7 @@ try:
     client = MongoClient(uri)
     symboles = {
         "LVMH Moët Hennessy - Louis Vuitton, Société Européenne": "MC.PA",
-        "Hermès International Société en commandite par actions": "RMS.PA",
+        "Hermès International Société": "RMS.PA",
         "L'Oréal S.A.": "OR.PA",
         "Christian Dior SE": "CDI.PA",
         "TotalEnergies SE": "TTE.PA",
